@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Ariano et al. 2020</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Ariano et al. 2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Ariano et al. 2020</h1>
+
+</div>
+
+
+<div id="load-data" class="section level3">
+<h3>Load data</h3>
+<pre class="r"><code>setwd(&quot;~/papers_&amp;_TCC/paper_Ariano&quot;)
+env = read.csv(&quot;~/papers_&amp;_TCC/paper_Ariano/dados_ariano.csv&quot;, header = T, sep = &quot;;&quot;) 
+str(env)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    252 obs. of  8 variables:
+##  $ Species: Factor w/ 7 levels &quot;A. macrocarpon&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Phyto  : Factor w/ 3 levels &quot;ASR&quot;,&quot;CDA&quot;,&quot;RCT&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STD    : num  367 330 348 385 339 ...
+##  $ STI    : num  16.4 14.2 14.1 17.7 16 ...
+##  $ Midrib : int  1206 1276 1335 1336 1218 1288 1349 1338 1487 1516 ...
+##  $ Meso   : int  308 307 306 306 308 309 315 323 309 325 ...
+##  $ Epid   : int  22 23 23 24 22 23 22 22 23 25 ...
+##  $ Bundl  : int  265 204 183 159 150 145 205 183 157 159 ...</code></pre>
+</div>
+<div id="implement-packages" class="section level3">
+<h3>Implement packages</h3>
+<pre class="r"><code>library(tidyverse); library(DHARMa); library(modEvA)</code></pre>
+</div>
+<div id="center-and-scale-the-data" class="section level3">
+<h3>Center and scale the data</h3>
+<pre class="r"><code>for (i in 1:length(colnames(env))) {
+  if (is.numeric(env[, i])==TRUE)
+    env[, i] &lt;- as.numeric(scale(env[, i]))
+  else
+    env[, i] &lt;- env[, i] }
+head(env)</code></pre>
+<pre><code>##          Species Phyto         STD        STI     Midrib       Meso       Epid
+## 1 A. occidentale   ASR -0.14739510 -0.5110993 -0.4250595 -0.8900101 -0.7717592
+## 2 A. occidentale   ASR -0.46978601 -0.8941772 -0.3298727 -0.9023598 -0.7150915
+## 3 A. occidentale   ASR -0.30863454 -0.9114330 -0.2496439 -0.9147095 -0.7150915
+## 4 A. occidentale   ASR  0.01384433 -0.2815976 -0.2482841 -0.9147095 -0.6584239
+## 5 A. occidentale   ASR -0.38921027 -0.5749456 -0.4087417 -0.8900101 -0.7717592
+## 6 A. occidentale   ASR -0.14739510 -0.7043638 -0.3135550 -0.8776605 -0.7150915
+##         Bundl
+## 1  2.09340160
+## 2  0.99866544
+## 3  0.62178906
+## 4  0.19107319
+## 5  0.02955474
+## 6 -0.06017773</code></pre>
+</div>
+<div id="generalized-linear-model-glm" class="section level3">
+<h3>Generalized linear model (GLM)</h3>
+<pre class="r"><code>glm1 = glm(cbind(STD+STI+Midrib+Meso+Epid+Bundl)~Phyto*Species, data = env)
+summary(glm1)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = cbind(STD + STI + Midrib + Meso + Epid + Bundl) ~ 
+##     Phyto * Species, data = env)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -3.6156  -0.5813   0.0545   0.6063   3.2313  
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                      2.9242     0.3219   9.085  &lt; 2e-16 ***
+## PhytoCDA                        -3.4111     0.4552  -7.494 1.41e-12 ***
+## PhytoRCT                        -2.9445     0.4552  -6.469 5.83e-10 ***
+## SpeciesA. occidentale           -4.9581     0.4552 -10.893  &lt; 2e-16 ***
+## SpeciesE. nitens                -4.8413     0.4552 -10.636  &lt; 2e-16 ***
+## SpeciesM. splendens             -5.6414     0.4552 -12.394  &lt; 2e-16 ***
+## SpeciesQ. parviflora            -4.3861     0.4552  -9.636  &lt; 2e-16 ***
+## SpeciesV. macrocarpa            -4.5075     0.4552  -9.903  &lt; 2e-16 ***
+## SpeciesV. rufa                   4.7942     0.4552  10.533  &lt; 2e-16 ***
+## PhytoCDA:SpeciesA. occidentale   3.8065     0.6437   5.913 1.20e-08 ***
+## PhytoRCT:SpeciesA. occidentale   4.3979     0.6437   6.832 7.35e-11 ***
+## PhytoCDA:SpeciesE. nitens        1.4441     0.6437   2.243 0.025818 *  
+## PhytoRCT:SpeciesE. nitens        0.4367     0.6437   0.678 0.498235    
+## PhytoCDA:SpeciesM. splendens     7.9742     0.6437  12.388  &lt; 2e-16 ***
+## PhytoRCT:SpeciesM. splendens     7.5593     0.6437  11.743  &lt; 2e-16 ***
+## PhytoCDA:SpeciesQ. parviflora    2.3462     0.6437   3.645 0.000331 ***
+## PhytoRCT:SpeciesQ. parviflora    1.2403     0.6437   1.927 0.055231 .  
+## PhytoCDA:SpeciesV. macrocarpa    4.5399     0.6437   7.053 2.02e-11 ***
+## PhytoRCT:SpeciesV. macrocarpa    1.9786     0.6437   3.074 0.002369 ** 
+## PhytoCDA:SpeciesV. rufa          1.8234     0.6437   2.833 0.005024 ** 
+## PhytoRCT:SpeciesV. rufa          4.1537     0.6437   6.453 6.39e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.243124)
+## 
+##     Null deviance: 3566.76  on 251  degrees of freedom
+## Residual deviance:  287.16  on 231  degrees of freedom
+## AIC: 792.06
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>a_glm = anova(glm1, test = &quot;Chisq&quot;); a_glm</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: gaussian, link: identity
+## 
+## Response: cbind(STD + STI + Midrib + Meso + Epid + Bundl)
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##               Df Deviance Resid. Df Resid. Dev Pr(&gt;Chi)    
+## NULL                            251     3566.8             
+## Phyto          2     3.25       249     3563.5     0.27    
+## Species        6  2882.28       243      681.2   &lt;2e-16 ***
+## Phyto:Species 12   394.06       231      287.2   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>g0 = glm(cbind(STD+STI+Midrib+Meso+Epid+Bundl)~1, data = env)
+anova(glm1, g0, test = &quot;F&quot;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model 1: cbind(STD + STI + Midrib + Meso + Epid + Bundl) ~ Phyto * Species
+## Model 2: cbind(STD + STI + Midrib + Meso + Epid + Bundl) ~ 1
+##   Resid. Df Resid. Dev  Df Deviance      F    Pr(&gt;F)    
+## 1       231      287.2                                  
+## 2       251     3566.8 -20  -3279.6 131.91 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>resid = simulateResiduals(glm1)
+Dsquared(model = glm1); Dsquared(model = glm1, adjust = TRUE)</code></pre>
+<pre><code>## [1] 0.9194894</code></pre>
+<pre><code>## [1] 0.9121384</code></pre>
+<p><img src="index_files/figure-html/pressure-1.png" width="672" /></p>
+</div>
+<div id="tukey-test-by-species-in-relation-to-phyto" class="section level3">
+<h3>Tukey test by Species in relation to ‘Phyto’</h3>
+<pre class="r"><code>A_occid &lt;- dplyr::filter(env, Species == &quot;A. occidentale&quot;)
+std = TukeyHSD(aov(lm(STD~Phyto, data = A_occid))); std</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STD ~ Phyto, data = A_occid))
+## 
+## $Phyto
+##               diff        lwr       upr     p adj
+## CDA-ASR 0.02686591 -0.6366458 0.6903776 0.9945734
+## RCT-ASR 0.04701717 -0.6164946 0.7105289 0.9834788
+## RCT-CDA 0.02015126 -0.6433605 0.6836630 0.9969431</code></pre>
+<pre class="r"><code>sti = TukeyHSD(aov(lm(STI~Phyto, data = A_occid))); sti </code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STI ~ Phyto, data = A_occid))
+## 
+## $Phyto
+##                diff        lwr       upr     p adj
+## CDA-ASR -0.30600221 -0.8337756 0.2217712 0.3411276
+## RCT-ASR -0.37588806 -0.9036615 0.1518853 0.2030597
+## RCT-CDA -0.06988584 -0.5976592 0.4578876 0.9435647</code></pre>
+<pre class="r"><code>epi = TukeyHSD(aov(lm(Epid~Phyto, data = A_occid))); epi</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Epid ~ Phyto, data = A_occid))
+## 
+## $Phyto
+##               diff        lwr        upr    p adj
+## CDA-ASR -0.2313928 -0.3468815 -0.1159041 6.87e-05
+## RCT-ASR  0.5902878  0.4747991  0.7057765 0.00e+00
+## RCT-CDA  0.8216807  0.7061920  0.9371694 0.00e+00</code></pre>
+<pre class="r"><code>bund = TukeyHSD(aov(lm(Bundl~Phyto, data = A_occid))); bund</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Bundl ~ Phyto, data = A_occid))
+## 
+## $Phyto
+##               diff        lwr      upr     p adj
+## CDA-ASR -0.3933273 -1.0856697 0.299015 0.3555659
+## RCT-ASR  0.4920331 -0.2003093 1.184375 0.2043870
+## RCT-CDA  0.8853604  0.1930180 1.577703 0.0097341</code></pre>
+<pre class="r"><code>meso = TukeyHSD(aov(lm(Meso~Phyto, data = A_occid))); meso</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Meso ~ Phyto, data = A_occid))
+## 
+## $Phyto
+##              diff        lwr      upr     p adj
+## CDA-ASR 0.7039318 0.25364224 1.154221 0.0015123
+## RCT-ASR 1.1773363 0.72704668 1.627626 0.0000008
+## RCT-CDA 0.4734044 0.02311486 0.923694 0.0376573</code></pre>
+<pre class="r"><code>midr = TukeyHSD(aov(lm(Midrib~Phyto, data = A_occid))); midr</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Midrib ~ Phyto, data = A_occid))
+## 
+## $Phyto
+##               diff        lwr        upr p adj
+## CDA-ASR  0.5953703  0.4784559  0.7122847     0
+## RCT-ASR -0.4774068 -0.5943212 -0.3604924     0
+## RCT-CDA -1.0727771 -1.1896915 -0.9558627     0</code></pre>
+<pre class="r"><code>A_macro &lt;- dplyr::filter(env, Species == &quot;A. macrocarpon&quot;)
+# std = TukeyHSD(aov(lm(STD~Phyto, data = A_macro))); std
+# sti = TukeyHSD(aov(lm(STI~Phyto, data = A_macro))); sti 
+epi = TukeyHSD(aov(lm(Epid~Phyto, data = A_macro))); epi</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Epid ~ Phyto, data = A_macro))
+## 
+## $Phyto
+##               diff        lwr        upr    p adj
+## CDA-ASR -1.3458562 -1.5224910 -1.1692215 0.00e+00
+## RCT-ASR -0.9822389 -1.1588737 -0.8056042 0.00e+00
+## RCT-CDA  0.3636173  0.1869826  0.5402520 4.62e-05</code></pre>
+<pre class="r"><code>bund = TukeyHSD(aov(lm(Bundl~Phyto, data = A_macro))); bund</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Bundl ~ Phyto, data = A_macro))
+## 
+## $Phyto
+##               diff        lwr         upr     p adj
+## CDA-ASR -0.2063847 -0.3670201 -0.04574931 0.0093745
+## RCT-ASR -0.8150700 -0.9757053 -0.65443458 0.0000000
+## RCT-CDA -0.6086853 -0.7693206 -0.44804989 0.0000000</code></pre>
+<pre class="r"><code>meso = TukeyHSD(aov(lm(Meso~Phyto, data = A_macro))); meso</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Meso ~ Phyto, data = A_macro))
+## 
+## $Phyto
+##               diff        lwr        upr p adj
+## CDA-ASR -1.0579560 -1.3042784 -0.8116336 0e+00
+## RCT-ASR -1.7701209 -2.0164434 -1.5237985 0e+00
+## RCT-CDA -0.7121649 -0.9584874 -0.4658425 1e-07</code></pre>
+<pre class="r"><code>midr = TukeyHSD(aov(lm(Midrib~Phyto, data = A_macro))); midr</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Midrib ~ Phyto, data = A_macro))
+## 
+## $Phyto
+##               diff       lwr        upr     p adj
+## CDA-ASR -0.6571284 -1.148721 -0.1655354 0.0067494
+## RCT-ASR  1.1719299  0.680337  1.6635229 0.0000044
+## RCT-CDA  1.8290583  1.337465  2.3206513 0.0000000</code></pre>
+<pre class="r"><code>e_nitens &lt;- dplyr::filter(env, Species == &quot;E. nitens&quot;)
+std = TukeyHSD(aov(lm(STD~Phyto, data = e_nitens))); std</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STD ~ Phyto, data = e_nitens))
+## 
+## $Phyto
+##               diff        lwr        upr     p adj
+## CDA-ASR  0.2552445 -0.1348971  0.6453860 0.2576210
+## RCT-ASR -0.6985943 -1.0887358 -0.3084527 0.0003128
+## RCT-CDA -0.9538387 -1.3439803 -0.5636971 0.0000028</code></pre>
+<pre class="r"><code>sti = TukeyHSD(aov(lm(STI~Phyto, data = e_nitens))); sti </code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STI ~ Phyto, data = e_nitens))
+## 
+## $Phyto
+##               diff        lwr           upr     p adj
+## CDA-ASR -1.3219353 -1.6357403 -1.0081302733 0.0000000
+## RCT-ASR -1.6358464 -1.9496515 -1.3220413776 0.0000000
+## RCT-CDA -0.3139111 -0.6277161 -0.0001060676 0.0499082</code></pre>
+<pre class="r"><code>epi = TukeyHSD(aov(lm(Epid~Phyto, data = e_nitens))); epi</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Epid ~ Phyto, data = e_nitens))
+## 
+## $Phyto
+##                diff        lwr         upr     p adj
+## CDA-ASR -0.21722592 -0.3095746 -0.12487724 0.0000056
+## RCT-ASR -0.07555684 -0.1679055  0.01679183 0.1261987
+## RCT-CDA  0.14166908  0.0493204  0.23401775 0.0018432</code></pre>
+<pre class="r"><code>bund = TukeyHSD(aov(lm(Bundl~Phyto, data = e_nitens))); bund</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Bundl ~ Phyto, data = e_nitens))
+## 
+## $Phyto
+##               diff        lwr         upr   p adj
+## CDA-ASR -0.1615184 -0.2260995 -0.09693741 1.9e-06
+## RCT-ASR  0.4501579  0.3855769  0.51473894 0.0e+00
+## RCT-CDA  0.6116764  0.5470953  0.67625739 0.0e+00</code></pre>
+<pre class="r"><code>meso = TukeyHSD(aov(lm(Meso~Phyto, data = e_nitens))); meso</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Meso ~ Phyto, data = e_nitens))
+## 
+## $Phyto
+##               diff        lwr        upr     p adj
+## CDA-ASR -0.4672296 -0.8135447 -0.1209145 0.0062340
+## RCT-ASR -0.6679119 -1.0142270 -0.3215968 0.0001174
+## RCT-CDA -0.2006823 -0.5469974  0.1456328 0.3415177</code></pre>
+<pre class="r"><code>midr = TukeyHSD(aov(lm(Midrib~Phyto, data = e_nitens))); midr</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Midrib ~ Phyto, data = e_nitens))
+## 
+## $Phyto
+##               diff         lwr        upr     p adj
+## CDA-ASR -0.0542791 -0.15199064 0.04343245 0.3715218
+## RCT-ASR  0.1198900  0.02217841 0.21760150 0.0134140
+## RCT-CDA  0.1741691  0.07645751 0.27188060 0.0003313</code></pre>
+<pre class="r"><code>m_splend &lt;- dplyr::filter(env, Species == &quot;M. splendens&quot;)
+std = TukeyHSD(aov(lm(STD~Phyto, data = m_splend))); std</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STD ~ Phyto, data = m_splend))
+## 
+## $Phyto
+##               diff        lwr         upr     p adj
+## CDA-ASR  2.7406159  1.9120400  3.56919173 0.0000000
+## RCT-ASR  1.8136358  0.9850599  2.64221159 0.0000181
+## RCT-CDA -0.9269801 -1.7555560 -0.09840429 0.0256117</code></pre>
+<pre class="r"><code>sti = TukeyHSD(aov(lm(STI~Phyto, data = m_splend))); sti </code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STI ~ Phyto, data = m_splend))
+## 
+## $Phyto
+##               diff         lwr       upr     p adj
+## CDA-ASR 0.67009883  0.02542906 1.3147686 0.0402446
+## RCT-ASR 0.74386722  0.09919745 1.3885370 0.0208392
+## RCT-CDA 0.07376839 -0.57090138 0.7184382 0.9575268</code></pre>
+<pre class="r"><code>epi = TukeyHSD(aov(lm(Epid~Phyto, data = m_splend))); epi</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Epid ~ Phyto, data = m_splend))
+## 
+## $Phyto
+##                diff         lwr        upr     p adj
+## CDA-ASR  0.23139283  0.06267540 0.40011025 0.0053994
+## RCT-ASR  0.14166908 -0.02704835 0.31038650 0.1138884
+## RCT-CDA -0.08972375 -0.25844117 0.07899367 0.4025458</code></pre>
+<pre class="r"><code>bund = TukeyHSD(aov(lm(Bundl~Phyto, data = e_nitens))); bund</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Bundl ~ Phyto, data = e_nitens))
+## 
+## $Phyto
+##               diff        lwr         upr   p adj
+## CDA-ASR -0.1615184 -0.2260995 -0.09693741 1.9e-06
+## RCT-ASR  0.4501579  0.3855769  0.51473894 0.0e+00
+## RCT-CDA  0.6116764  0.5470953  0.67625739 0.0e+00</code></pre>
+<pre class="r"><code>meso = TukeyHSD(aov(lm(Meso~Phyto, data = m_splend))); meso</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Meso ~ Phyto, data = m_splend))
+## 
+## $Phyto
+##               diff        lwr       upr     p adj
+## CDA-ASR 0.53515284  0.2755941 0.7947116 0.0000452
+## RCT-ASR 0.63189201  0.3723333 0.8914507 0.0000031
+## RCT-CDA 0.09673917 -0.1628195 0.3562979 0.6350877</code></pre>
+<pre class="r"><code>midr = TukeyHSD(aov(lm(Midrib~Phyto, data = m_splend))); midr</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Midrib ~ Phyto, data = m_splend))
+## 
+## $Phyto
+##               diff        lwr        upr    p adj
+## CDA-ASR -0.1421002 -0.2106165 -0.0735839 4.14e-05
+## RCT-ASR  0.1755289  0.1070126  0.2440451 1.20e-06
+## RCT-CDA  0.3176291  0.2491128  0.3861453 0.00e+00</code></pre>
+<pre class="r"><code>q_parvi &lt;- dplyr::filter(env, Species == &quot;Q. parviflora&quot;)
+std = TukeyHSD(aov(lm(STD~Phyto, data = q_parvi))); std</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STD ~ Phyto, data = q_parvi))
+## 
+## $Phyto
+##               diff        lwr        upr     p adj
+## CDA-ASR -0.8530897 -1.5267610 -0.1794184 0.0105209
+## RCT-ASR  0.1141856 -0.5594857  0.7878569 0.9093189
+## RCT-CDA  0.9672753  0.2936040  1.6409466 0.0035488</code></pre>
+<pre class="r"><code>sti = TukeyHSD(aov(lm(STI~Phyto, data = q_parvi))); sti </code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STI ~ Phyto, data = q_parvi))
+## 
+## $Phyto
+##               diff       lwr         upr     p adj
+## CDA-ASR  0.2198672 -0.585662  1.02539641 0.7825190
+## RCT-ASR -0.8509968 -1.656526 -0.04546754 0.0365916
+## RCT-CDA -1.0708639 -1.876393 -0.26533473 0.0070728</code></pre>
+<pre class="r"><code>epi = TukeyHSD(aov(lm(Epid~Phyto, data = q_parvi))); epi</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Epid ~ Phyto, data = q_parvi))
+## 
+## $Phyto
+##                diff        lwr        upr     p adj
+## CDA-ASR  0.30694967  0.2132451 0.40065424 0.0000000
+## RCT-ASR  0.27861585  0.1849113 0.37232042 0.0000001
+## RCT-CDA -0.02833382 -0.1220384 0.06537075 0.7405251</code></pre>
+<pre class="r"><code>bund = TukeyHSD(aov(lm(Bundl~Phyto, data = q_parvi))); bund</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Bundl ~ Phyto, data = q_parvi))
+## 
+## $Phyto
+##               diff        lwr         upr     p adj
+## CDA-ASR -0.7986190 -1.0514003 -0.54583768 0.0000000
+## RCT-ASR -1.0379056 -1.2906869 -0.78512427 0.0000000
+## RCT-CDA -0.2392866 -0.4920679  0.01349473 0.0664888</code></pre>
+<pre class="r"><code>meso = TukeyHSD(aov(lm(Meso~Phyto, data = q_parvi))); meso</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Meso ~ Phyto, data = q_parvi))
+## 
+## $Phyto
+##               diff        lwr         upr     p adj
+## CDA-ASR -0.2047989 -0.4428216  0.03322386 0.1029716
+## RCT-ASR -0.5711727 -0.8091955 -0.33315001 0.0000039
+## RCT-CDA -0.3663739 -0.6043966 -0.12835113 0.0017799</code></pre>
+<pre class="r"><code>midr = TukeyHSD(aov(lm(Midrib~Phyto, data = q_parvi))); midr</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Midrib ~ Phyto, data = q_parvi))
+## 
+## $Phyto
+##              diff        lwr       upr    p adj
+## CDA-ASR 0.2648231 0.19318100 0.3364652 0.000000
+## RCT-ASR 0.3630694 0.29142730 0.4347115 0.000000
+## RCT-CDA 0.0982463 0.02660422 0.1698884 0.005404</code></pre>
+<pre class="r"><code>v_macro &lt;- dplyr::filter(env, Species == &quot;V. macrocarpa&quot;)
+std = TukeyHSD(aov(lm(STD~Phyto, data = v_macro))); std</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STD ~ Phyto, data = v_macro))
+## 
+## $Phyto
+##               diff        lwr         upr     p adj
+## CDA-ASR -0.4970670 -0.9281809 -0.06595297 0.0209494
+## RCT-ASR -0.8060726 -1.2371865 -0.37495856 0.0001787
+## RCT-CDA -0.3090056 -0.7401196  0.12210839 0.1991689</code></pre>
+<pre class="r"><code>sti = TukeyHSD(aov(lm(STI~Phyto, data = v_macro))); sti </code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STI ~ Phyto, data = v_macro))
+## 
+## $Phyto
+##               diff        lwr        upr     p adj
+## CDA-ASR -0.5275950 -0.9495608 -0.1056291 0.0116188
+## RCT-ASR -0.7851373 -1.2071031 -0.3631714 0.0001906
+## RCT-CDA -0.2575423 -0.6795081  0.1644236 0.3050652</code></pre>
+<pre class="r"><code>epi = TukeyHSD(aov(lm(Epid~Phyto, data = v_macro))); epi</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Epid ~ Phyto, data = v_macro))
+## 
+## $Phyto
+##              diff         lwr       upr     p adj
+## CDA-ASR 0.1275022 -0.01102084 0.2660252 0.0761667
+## RCT-ASR 0.3777842  0.23926119 0.5163072 0.0000004
+## RCT-CDA 0.2502820  0.11175902 0.3888051 0.0002791</code></pre>
+<pre class="r"><code>bund = TukeyHSD(aov(lm(Bundl~Phyto, data = v_macro))); bund</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Bundl ~ Phyto, data = v_macro))
+## 
+## $Phyto
+##                diff        lwr        upr     p adj
+## CDA-ASR  1.83203797  1.1544111  2.5096648 0.0000004
+## RCT-ASR  0.02392866 -0.6536982  0.7015555 0.9958697
+## RCT-CDA -1.80810931 -2.4857362 -1.1304825 0.0000006</code></pre>
+<pre class="r"><code>meso = TukeyHSD(aov(lm(Meso~Phyto, data = v_macro))); meso</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Meso ~ Phyto, data = v_macro))
+## 
+## $Phyto
+##                diff         lwr        upr     p adj
+## CDA-ASR -0.20994458 -0.47488034 0.05499119 0.1423108
+## RCT-ASR  0.02367022 -0.24126555 0.28860599 0.9738736
+## RCT-CDA  0.23361480 -0.03132097 0.49855057 0.0926465</code></pre>
+<pre class="r"><code>midr = TukeyHSD(aov(lm(Midrib~Phyto, data = v_macro))); midr</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Midrib ~ Phyto, data = v_macro))
+## 
+## $Phyto
+##               diff        lwr        upr p adj
+## CDA-ASR  0.4038637  0.3308940  0.4768334 0e+00
+## RCT-ASR  0.1998921  0.1269225  0.2728618 3e-07
+## RCT-CDA -0.2039716 -0.2769412 -0.1310019 2e-07</code></pre>
+<pre class="r"><code>v_rufa &lt;- dplyr::filter(env, Species == &quot;V. rufa&quot;)
+std = TukeyHSD(aov(lm(STD~Phyto, data = v_rufa))); std</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STD ~ Phyto, data = v_rufa))
+## 
+## $Phyto
+##                diff        lwr        upr     p adj
+## CDA-ASR -1.05458770 -1.3893680 -0.7198074 0.0000000
+## RCT-ASR -0.04700984 -0.3817901  0.2877704 0.9367783
+## RCT-CDA  1.00757786  0.6727976  1.3423581 0.0000001</code></pre>
+<pre class="r"><code>sti = TukeyHSD(aov(lm(STI~Phyto, data = v_rufa))); sti</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(STI ~ Phyto, data = v_rufa))
+## 
+## $Phyto
+##              diff        lwr         upr     p adj
+## CDA-ASR -0.219292 -0.7492349  0.31065087 0.5725562
+## RCT-ASR -0.818067 -1.3480099 -0.28812414 0.0017271
+## RCT-CDA -0.598775 -1.1287179 -0.06883214 0.0240015</code></pre>
+<pre class="r"><code>epi = TukeyHSD(aov(lm(Epid~Phyto, data = v_rufa))); epi</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Epid ~ Phyto, data = v_rufa))
+## 
+## $Phyto
+##              diff        lwr       upr     p adj
+## CDA-ASR 0.4155626  0.0381696 0.7929557 0.0283654
+## RCT-ASR 0.6375109  0.2601178 1.0149039 0.0006361
+## RCT-CDA 0.2219482 -0.1554448 0.5993413 0.3310730</code></pre>
+<pre class="r"><code>bund = TukeyHSD(aov(lm(Bundl~Phyto, data = v_rufa))); bund</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Bundl ~ Phyto, data = v_rufa))
+## 
+## $Phyto
+##                diff        lwr        upr     p adj
+## CDA-ASR -0.51446617 -0.6025309 -0.4264014 0.0000000
+## RCT-ASR -0.54886362 -0.6369284 -0.4607989 0.0000000
+## RCT-CDA -0.03439745 -0.1224622  0.0536673 0.6078287</code></pre>
+<pre class="r"><code>meso = TukeyHSD(aov(lm(Meso~Phyto, data = v_rufa))); meso</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Meso ~ Phyto, data = v_rufa))
+## 
+## $Phyto
+##              diff        lwr       upr     p adj
+## CDA-ASR 0.0360199 -0.4436434 0.5156832 0.9814662
+## RCT-ASR 1.2843668  0.8047036 1.7640301 0.0000005
+## RCT-CDA 1.2483469  0.7686836 1.7280102 0.0000009</code></pre>
+<pre class="r"><code>midr = TukeyHSD(aov(lm(Midrib~Phyto, data = v_rufa))); midr</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = lm(Midrib ~ Phyto, data = v_rufa))
+## 
+## $Phyto
+##               diff        lwr        upr     p adj
+## CDA-ASR -0.2508850 -0.3865575 -0.1152125 0.0002067
+## RCT-ASR  0.7012089  0.5655364  0.8368814 0.0000000
+## RCT-CDA  0.9520939  0.8164214  1.0877665 0.0000000</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
