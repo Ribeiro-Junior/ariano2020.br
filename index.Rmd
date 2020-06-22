@@ -1,0 +1,99 @@
+---
+title: "Ariano et al. 2020"
+---
+
+
+### Load data
+```{r message=FALSE, warning=FALSE}
+setwd("~/papers_&_TCC/paper_Ariano")
+env = read.csv("~/papers_&_TCC/paper_Ariano/dados_ariano.csv", header = T, sep = ";") 
+str(env)
+```
+### Implement packages
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse); library(DHARMa); library(modEvA)
+```
+
+
+### Center and scale the data 
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+for (i in 1:length(colnames(env))) {
+  if (is.numeric(env[, i])==TRUE)
+    env[, i] <- as.numeric(scale(env[, i]))
+  else
+    env[, i] <- env[, i] }
+head(env)
+```
+
+### Generalized linear model (GLM)
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+glm1 = glm(cbind(STD+STI+Midrib+Meso+Epid+Bundl)~Phyto*Species, data = env)
+summary(glm1)
+a_glm = anova(glm1, test = "Chisq"); a_glm
+g0 = glm(cbind(STD+STI+Midrib+Meso+Epid+Bundl)~1, data = env)
+anova(glm1, g0, test = "F")
+resid = simulateResiduals(glm1)
+Dsquared(model = glm1); Dsquared(model = glm1, adjust = TRUE)
+```
+```{r pressure, echo=FALSE}
+plot(resid)
+```
+
+### Tukey test by Species in relation to 'Phyto'
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+A_occid <- dplyr::filter(env, Species == "A. occidentale")
+std = TukeyHSD(aov(lm(STD~Phyto, data = A_occid))); std
+sti = TukeyHSD(aov(lm(STI~Phyto, data = A_occid))); sti 
+epi = TukeyHSD(aov(lm(Epid~Phyto, data = A_occid))); epi
+bund = TukeyHSD(aov(lm(Bundl~Phyto, data = A_occid))); bund
+meso = TukeyHSD(aov(lm(Meso~Phyto, data = A_occid))); meso
+midr = TukeyHSD(aov(lm(Midrib~Phyto, data = A_occid))); midr
+
+A_macro <- dplyr::filter(env, Species == "A. macrocarpon")
+# std = TukeyHSD(aov(lm(STD~Phyto, data = A_macro))); std
+# sti = TukeyHSD(aov(lm(STI~Phyto, data = A_macro))); sti 
+epi = TukeyHSD(aov(lm(Epid~Phyto, data = A_macro))); epi
+bund = TukeyHSD(aov(lm(Bundl~Phyto, data = A_macro))); bund
+meso = TukeyHSD(aov(lm(Meso~Phyto, data = A_macro))); meso
+midr = TukeyHSD(aov(lm(Midrib~Phyto, data = A_macro))); midr
+
+e_nitens <- dplyr::filter(env, Species == "E. nitens")
+std = TukeyHSD(aov(lm(STD~Phyto, data = e_nitens))); std
+sti = TukeyHSD(aov(lm(STI~Phyto, data = e_nitens))); sti 
+epi = TukeyHSD(aov(lm(Epid~Phyto, data = e_nitens))); epi
+bund = TukeyHSD(aov(lm(Bundl~Phyto, data = e_nitens))); bund
+meso = TukeyHSD(aov(lm(Meso~Phyto, data = e_nitens))); meso
+midr = TukeyHSD(aov(lm(Midrib~Phyto, data = e_nitens))); midr
+
+m_splend <- dplyr::filter(env, Species == "M. splendens")
+std = TukeyHSD(aov(lm(STD~Phyto, data = m_splend))); std
+sti = TukeyHSD(aov(lm(STI~Phyto, data = m_splend))); sti 
+epi = TukeyHSD(aov(lm(Epid~Phyto, data = m_splend))); epi
+bund = TukeyHSD(aov(lm(Bundl~Phyto, data = e_nitens))); bund
+meso = TukeyHSD(aov(lm(Meso~Phyto, data = m_splend))); meso
+midr = TukeyHSD(aov(lm(Midrib~Phyto, data = m_splend))); midr
+
+q_parvi <- dplyr::filter(env, Species == "Q. parviflora")
+std = TukeyHSD(aov(lm(STD~Phyto, data = q_parvi))); std
+sti = TukeyHSD(aov(lm(STI~Phyto, data = q_parvi))); sti 
+epi = TukeyHSD(aov(lm(Epid~Phyto, data = q_parvi))); epi
+bund = TukeyHSD(aov(lm(Bundl~Phyto, data = q_parvi))); bund
+meso = TukeyHSD(aov(lm(Meso~Phyto, data = q_parvi))); meso
+midr = TukeyHSD(aov(lm(Midrib~Phyto, data = q_parvi))); midr
+
+v_macro <- dplyr::filter(env, Species == "V. macrocarpa")
+std = TukeyHSD(aov(lm(STD~Phyto, data = v_macro))); std
+sti = TukeyHSD(aov(lm(STI~Phyto, data = v_macro))); sti 
+epi = TukeyHSD(aov(lm(Epid~Phyto, data = v_macro))); epi
+bund = TukeyHSD(aov(lm(Bundl~Phyto, data = v_macro))); bund
+meso = TukeyHSD(aov(lm(Meso~Phyto, data = v_macro))); meso
+midr = TukeyHSD(aov(lm(Midrib~Phyto, data = v_macro))); midr
+
+v_rufa <- dplyr::filter(env, Species == "V. rufa")
+std = TukeyHSD(aov(lm(STD~Phyto, data = v_rufa))); std
+sti = TukeyHSD(aov(lm(STI~Phyto, data = v_rufa))); sti
+epi = TukeyHSD(aov(lm(Epid~Phyto, data = v_rufa))); epi
+bund = TukeyHSD(aov(lm(Bundl~Phyto, data = v_rufa))); bund
+meso = TukeyHSD(aov(lm(Meso~Phyto, data = v_rufa))); meso
+midr = TukeyHSD(aov(lm(Midrib~Phyto, data = v_rufa))); midr
+```
